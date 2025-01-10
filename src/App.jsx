@@ -1,0 +1,28 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ChapterPage from './pages/ChapterPage';
+import VersePage from './pages/VersePage';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ErrorBoundary from './components/ErrorBoundary';
+import ToastContainer from './components/ToastContainer';
+
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <Router>
+        <Header />
+        <ToastContainer />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/chapter/:ch" element={<ChapterPage />} />
+          <Route path="/verse/:ch/:sl" element={<VersePage />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ErrorBoundary>
+  );
+};
+
+export default App;
