@@ -8,10 +8,15 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchChapters().then((data) => {
-      setChapters(data);
-      setLoading(false);
-    });
+    fetchChapters()
+      .then((data) => {
+        setChapters(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching chapters:', error);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -22,7 +27,7 @@ const HomePage = () => {
       ) : (
         <div className="grid gap-4">
           {chapters.map((chapter) => (
-            <ChapterCard key={chapter.chapter_number} chapter={chapter} />
+            <ChapterCard key={chapter.id} chapter={chapter} />
           ))}
         </div>
       )}
