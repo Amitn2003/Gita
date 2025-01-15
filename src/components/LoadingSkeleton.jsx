@@ -1,11 +1,13 @@
-import React from 'react';
-
 const LoadingSkeleton = () => {
   return (
-    <div className="animate-pulse space-y-4">
-      {[...Array(5)].map((_, index) => (
-        <div key={index} className="h-6 bg-gray-300 rounded"></div>
+    <div className="animate-pulse space-y-6">
+
+      {[...Array(18)].map((_, index) => (
+
+        <div key={index} className="h-32 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300 rounded-lg shadow-md" />
+
       ))}
+
     </div>
   );
 };

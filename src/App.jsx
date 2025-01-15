@@ -7,12 +7,14 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import ToastContainer from './components/ToastContainer';
+import { SanskritProvider } from './context/SanskritContext';
 
 const App = () => {
   return (
     <ErrorBoundary>
+      <SanskritProvider>
       <Router>
-        <Header />
+        <Header />        
         <ToastContainer />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -21,6 +23,7 @@ const App = () => {
         </Routes>
         <Footer />
       </Router>
+      </SanskritProvider>
     </ErrorBoundary>
   );
 };
