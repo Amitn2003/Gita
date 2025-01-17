@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchVerses } from '../utils/api';
-import LoadingSkeleton from '../components/LoadingSkeleton';
+import LoadingVerseSkeleton from '../components/LoadingVerseSkeleton';
 
 const VersePage = () => {
   const { ch, sl } = useParams(); 
@@ -22,7 +22,7 @@ const VersePage = () => {
   }, [ch, sl]);
 
   if (loading) {
-    return <LoadingSkeleton />;
+    return <LoadingVerseSkeleton />;
   }
 
   if (!verse) {

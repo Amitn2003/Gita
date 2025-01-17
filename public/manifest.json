@@ -16,6 +16,22 @@
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#f59e0b"
+    "theme_color": "#f59e0b",
+    "shortcuts": [
+      {
+        "name": "Open Chapters",
+        "short_name": "Chapters",
+        "description": "View all Bhagavad Gita chapters",
+        "url": "/",
+        "icons": [{ "src": "icon-192x192.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "Daily Verse",
+        "short_name": "Verse",
+        "description": "View today's Bhagavad Gita verse",
+        "url": "/verse/1/1",
+        "icons": [{ "src": "icon-192x192.png", "sizes": "192x192" }]
+      }
+    ]
   }
   
