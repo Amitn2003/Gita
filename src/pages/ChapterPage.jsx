@@ -169,8 +169,9 @@ const ChapterPage = () => {
 
     <h1 className="text-3xl font-bold text-amber-800 mb-4 text-center">
 
-      {isSanskrit ? chapter.name : chapter.name_translated} ({chapter.name})
-
+      {isSanskrit ? chapter.name : chapter.name_translated} 
+      
+      {/* ({chapter.name}) */}
     </h1>
 
     <p className="text-lg italic text-gray-700 text-center">

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-gita-dynamic-cache-v2';
+const CACHE_NAME = 'my-gita-cache-v4';
 const STATIC_FILES = [
   '/',
   '/index.html',
@@ -9,7 +9,7 @@ const STATIC_FILES = [
   '/static/js/main.chunk.js',
 ];
 
-// Cache static files during installation
+// Pre-cache static assets during installation
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -18,7 +18,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Remove old caches during activation
+// Clean up old caches during activation
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -33,32 +33,27 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Intercept and cache GET requests dynamically
+// Intercept fetch requests for caching
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Only cache GET requests
+  // Cache GET requests
   if (request.method === 'GET') {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
         if (cachedResponse) {
-          return cachedResponse; // Serve from cache if available
+          return cachedResponse;
         }
 
-        // Fetch from network and cache the response
         return fetch(request)
           .then((response) => {
-            // Clone response to save it in cache
             const clonedResponse = response.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(request, clonedResponse);
             });
             return response;
           })
-          .catch(() => {
-            // Fallback for offline or error
-            return caches.match('/index.html');
-          });
+          .catch(() => caches.match('/index.html')); // Fallback to index.html for offline mode
       })
     );
   }

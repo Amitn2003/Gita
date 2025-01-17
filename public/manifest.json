@@ -23,14 +23,14 @@
         "short_name": "Chapters",
         "description": "View all Bhagavad Gita chapters",
         "url": "/",
-        "icons": [{ "src": "gitaicon.png", "sizes": "192x192" }]
+        "icons": [{ "src": "gita2.png", "sizes": "192x192" }]
       },
       {
         "name": "Daily Verse",
         "short_name": "Verse",
         "description": "View today's Bhagavad Gita verse",
         "url": "/verse/1/1",
-        "icons": [{ "src": "gitaicon.png", "sizes": "192x192" }]
+        "icons": [{ "src": "gita2.png", "sizes": "512x512" }]
       },
       {
         "shortcuts": [
