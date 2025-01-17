@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import ChapterPage from './pages/ChapterPage';
 import VersePage from './pages/VersePage';
 import Header from './components/Header';
+import DailyVersePage from './pages/DailyVersePage';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import ToastContainer from './components/ToastContainer';
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/chapter/:ch" element={<ChapterPage />} />
           <Route path="/verse/:ch/:sl" element={<VersePage />} />
+          <Route path="/daily-verse" element={<DailyVersePage />} />
         </Routes>
         <Footer />
       </Router>
