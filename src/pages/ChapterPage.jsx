@@ -227,13 +227,18 @@ const ChapterPage = () => {
 
         return (
 
+            <Link
+
+to={`/verse/${verse.chapter_number}/${verse.verse_number}`}
+
+>
           <div
 
             key={verse.id}
 
             className="w-full h-52 p-4 border border-amber-600 rounded-lg bg-gradient-to-b from-yellow-50 via-yellow-100 to-yellow-200 shadow-md hover:shadow-lg hover:from-yellow-100 hover:to-yellow-300 transition-all duration-300 ease-in-out transform hover:scale-105"
 
-          >
+            >
 
             <h3 className="text-lg font-bold text-amber-800 mb-2">
 
@@ -245,21 +250,10 @@ const ChapterPage = () => {
 
               {isSanskrit ? verse.text : translation.slice(0, 220)}...
 
-            </p>
-
-            <Link
-
-              to={`/verse/${verse.chapter_number}/${verse.verse_number}`}
-
-              className="text-blue-600 hover:underline font-semibold"
-
-            >
-
-              Read More
-
-            </Link>
+            </p> 
 
           </div>
+            </Link>
 
         );
 
