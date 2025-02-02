@@ -13,6 +13,7 @@ import { SanskritProvider } from './context/SanskritContext';
 import { requestNotificationPermission } from './utils/notifications';
 import { scheduleDailyNotifications } from './utils/dailyNotification';
 import ChapterMain from './pages/ChapterMain';
+import NotFound from './pages/NotFound';
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/verse/:ch/:sl" element={<VersePage />} />
           <Route path="/daily-verse" element={<DailyVersePage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="*" element={<NotFound />} /> 
         </Routes>
         <Footer />
       </Router>

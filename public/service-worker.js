@@ -5,6 +5,16 @@ const STATIC_FILES = [
   '/index.html',
   '/manifest.json',
   '/favicon.ico',
+  'gitaicon.png',
+  'gita-110.png',
+  'gita2.png',
+  'gita-112.png',
+  'gita-126.png',
+  'book.png',
+  'delete.png',
+  'gita-136.png',
+  'gita-139.png',
+  'gita-theme-image.jpg',
   '/static/js/bundle.js',
   '/static/js/0.chunk.js',
   '/static/js/main.chunk.js',
@@ -97,11 +107,19 @@ self.addEventListener('fetch', (event) => {
 // Handle notification click events
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
+// Ensure the URL is correctly set for the PWA to open
+const notificationUrl = event.notification.data.url;
 
-  // Open the specific verse page when the notification is clicked
-  event.waitUntil(
-    clients.openWindow(event.notification.data.url)
-  );
+if (event.action === 'openVerse') {
+  // Open the specific verse page when the "Read Verse" button is clicked
+  event.waitUntil(clients.openWindow(notificationUrl));
+} else if (event.action === 'dismiss') {
+  // If "Dismiss" is clicked, do nothing or perform custom action
+  console.log("Notification dismissed.");
+} else {
+  // Default action when the notification is clicked (e.g., open the verse)
+  event.waitUntil(clients.openWindow(notificationUrl));
+}
 });
 
 
@@ -109,6 +127,16 @@ self.addEventListener('notificationclick', (event) => {
 // Schedule periodic random verse notifications
 const sendRandomVerseNotification = async () => {
   try {
+    // Check if there is already an active notification with the same tag
+    const existingNotifications = await self.registration.getNotifications();
+    
+    // If there is an existing notification with the same tag, don't send a new one
+    if (existingNotifications.some(notification => notification.tag === "bhagavad-gita-verse-notification")) {
+      console.log("An existing notification is still active. Not sending a new one.");
+      return;
+    }
+
+
     // Select a random chapter and verse number
     const chapterNumber = Math.floor(Math.random() * 18) + 1;
     // Get the number of verses in the selected chapter
@@ -122,6 +150,7 @@ const sendRandomVerseNotification = async () => {
         "x-rapidapi-host": "bhagavad-gita3.p.rapidapi.com"
       },
     });
+    // console.log(response)
 
     if (!response.ok) {
       console.error("Failed to fetch verse for notification");
@@ -129,12 +158,48 @@ const sendRandomVerseNotification = async () => {
     }
 
     const verseData = await response.json();
-    const verseText = verseData.text || "Open Bhagavad Gita Verse";
+    function getFirstEnglishTranslation(verseData) {
+      // Check if translations array exists and has elements
+      if (verseData.translations && verseData.translations.length > 0) {
+        // Find the first translation in English
+        const englishTranslation = verseData.translations.find(translation => translation.language.toLowerCase() === 'english');
+        if (englishTranslation) {
+          return englishTranslation.description; // Return the English translation text
+        }
+      }
+      return null; // Return null if no English translation is found
+    }
+    
+    // Example usage:
+    console.log(getFirstEnglishTranslation(verseData));
+    
+
+
+    const verseText = getFirstEnglishTranslation(verseData) || "Open Bhagavad Gita Verse";
 
     // Show the notification with verse text
     self.registration.showNotification("Bhagavad Gita Verse", {
       body: verseText,
-      icon: "/favicon.ico",
+      icon: "https://mygita.vercel.app/gita2.png",
+      badge: "https://mygita.vercel.app/gita-110.ico",
+      image: "https://mygita.vercel.app/images/gita-139.jpg",  // Optional image to display
+      sound: "https://mygita.vercel.app/Notification/shankh_sms.mp3",  // Custom sound for notification
+      tag: "bhagavad-gita-verse-notification", // To replace similar notifications
+      vibrate: [200, 100, 200], // Vibration pattern for mobile devices 
+      renotify: true,  // Allow renotification on repeat notifications
+      requireInteraction: false,  // Ensure notification stays visible
+      actions: [
+        {
+          action: "openVerse",
+          title: "Read Verse",
+          icon: "https://mygita.vercel.app/Notification/book.png" // Action icon
+        },
+        {
+          action: "dismiss",
+          title: "Dismiss",
+          icon: "https://mygita.vercel.app/Notification/delete.png" // Action icon
+        }
+      ],
       data: {
         url: `/verse/${chapterNumber}/${verseNumber}`
       }
@@ -151,4 +216,7 @@ setInterval(() => {
 }, 3600000); // 1 hour in milliseconds
 // setInterval(() => {
 //   sendRandomVerseNotification();
-// }, 1000); // 1 hour in milliseconds
+// }, 1800000); // 30 minutes in milliseconds
+setInterval(() => {
+  sendRandomVerseNotification();
+}, 600000); // 5 minutes in milliseconds

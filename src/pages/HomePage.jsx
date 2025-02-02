@@ -49,7 +49,7 @@ const HomePage = () => {
       <section className="py-16">
         <div className="container mx-auto px-6 flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 mb-8 md:mb-0 md:mx-5">
-            <img src={gitaImg} alt="Bhagavad Gita Manuscript" className="rounded shadow-lg" />
+            <img src={gitaImg} alt="Bhagavad Gita Manuscript"  loading="lazy"  className="rounded shadow-lg" />
           </div>
           <div className="w-full md:w-1/2">
             <h2 className="text-3xl font-bold text-amber-800 mb-4">About the Bhagavad Gita</h2>
@@ -179,6 +179,7 @@ const HomePage = () => {
         src={gitaStarting}
         alt="Bhagavad Gita Manuscript"
         className="w-full h-auto rounded shadow-lg"
+        loading="lazy" 
       />
     </div>
 
