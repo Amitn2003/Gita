@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-gita-cache-v5';
+const CACHE_NAME = 'my-gita-cache-v6';
 const API_URL = "https://bhagavad-gita3.p.rapidapi.com/v2/chapters/";
 const STATIC_FILES = [
   '/',
@@ -158,6 +158,7 @@ if (event.action === 'openVerse') {
 
 // Schedule periodic random verse notifications
 const sendRandomVerseNotification = async () => {
+  console.log("Sending random verse notification...");
   try {
     // Check if there is already an active notification with the same tag
     const existingNotifications = await self.registration.getNotifications();
@@ -249,6 +250,9 @@ setInterval(() => {
 // setInterval(() => {
 //   sendRandomVerseNotification();
 // }, 1800000); // 30 minutes in milliseconds
+// setInterval(() => {
+//   sendRandomVerseNotification();
+// }, 600000); // 5 minutes in milliseconds
 setInterval(() => {
   sendRandomVerseNotification();
-}, 600000); // 5 minutes in milliseconds
+}, 10000); // 5 minutes in milliseconds
