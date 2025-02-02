@@ -47,10 +47,12 @@ const gitaChapters = {
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_FILES);
+      return cache.addAll(STATIC_FILES).then(() => {
+        console.log('Static assets cached successfully.');
+      });
     })
   );
-  self.skipWaiting(); // Force the waiting service worker to activate
+  self.skipWaiting(); // Force the waiting service worker to activate immediately
 });
 
 // Clean up old caches during activation
@@ -79,15 +81,20 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
         if (cachedResponse) {
+          // Return cached response if found
           return cachedResponse;
         }
 
+        // Fetch from network if not in cache
         return fetch(request)
           .then((response) => {
-            const clonedResponse = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, clonedResponse);
-            });
+            // Only cache GET requests for API responses or static assets
+            if (request.url.startsWith(API_URL) || STATIC_FILES.includes(new URL(request.url).pathname)) {
+              const clonedResponse = response.clone();
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(request, clonedResponse);
+              });
+            }
             return response;
           })
           .catch(() => caches.match('/index.html')); // Fallback to index.html for offline mode
@@ -95,6 +102,31 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+
+// self.addEventListener('fetch', (event) => {
+//   const { request } = event;
+
+//   // Cache GET requests
+//   if (request.method === 'GET') {
+//     event.respondWith(
+//       caches.match(request).then((cachedResponse) => {
+//         if (cachedResponse) {
+//           return cachedResponse;
+//         }
+
+//         return fetch(request)
+//           .then((response) => {
+//             const clonedResponse = response.clone();
+//             caches.open(CACHE_NAME).then((cache) => {
+//               cache.put(request, clonedResponse);
+//             });
+//             return response;
+//           })
+//           .catch(() => caches.match('/index.html')); // Fallback to index.html for offline mode
+//       })
+//     );
+//   }
+// });
 
 
 // // Listen for messages from the main thread to force an update

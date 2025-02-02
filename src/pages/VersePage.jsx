@@ -68,10 +68,10 @@ const VersePage = () => {
         <h1 className="text-3xl font-bold text-center text-amber-800 mb-4">
           Chapter {ch}, Verse {sl}
         </h1>
-        <p className="text-lg italic text-gray-800 text-center mb-4">
+        <p className="text-lg  text-gray-800 text-center mb-4 noto-serif-devanagari-500">
           {verse.text}
         </p>
-        <p className="text-lg italic text-gray-800 text-center mb-4">
+        <p className="text-lg  text-gray-800 text-center mb-4 ">
           {englishTranslation}
         </p>
         <div className="flex justify-center gap-4 mb-4">

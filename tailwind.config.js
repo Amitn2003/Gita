@@ -2,6 +2,9 @@
 export default {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
+    fontFamily: {
+      'display': ["Noto Serif Devanagari", serif],
+     },
     extend: {extend: {
       animation: {
         rotateSlow: 'rotateSlow 10s linear infinite',

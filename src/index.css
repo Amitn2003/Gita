@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.noto-serif-devanagari-500> {
+    font-family: "Noto Serif Devanagari", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+      color: red; 
+      background: red;
+  }
+  @font-face {
+    font-family: 'Sanskrit';
+    src: url('/Fonts/sanskrit.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .class-name {
+    font-family: 'YourFontName', sans-serif;
+    
+  }
