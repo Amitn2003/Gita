@@ -22,7 +22,7 @@ const Header = () => {
     <nav className="sticky top-0 z-50 bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-200 shadow-lg border-b border-amber-600 bg-amber-600">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center ">
         {/* App Title */}
-        <Link to="/" className="text-2xl font-bold text-amber-800">
+        <Link to="/" className="text-2xl font-bold text-amber-800 eng-sanskrit">
           My Gita
         </Link>
 

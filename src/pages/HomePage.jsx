@@ -134,7 +134,7 @@ const HomePage = () => {
       {/* Famous Quotes Section */}
       <section className="py-16 bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-400">
         <div className="container mx-auto px-6 text-center ">
-          <h2 className="text-3xl font-bold text-amber-900 mb-6 ">Famous Quotes</h2>
+          <h2 className="text-3xl font-bold text-amber-900 mb-6 eng-sanskrit">Famous Quotes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <blockquote className="bg-white shadow-md p-6 rounded">
               <p className="italic text-gray-700">"The Bhagavad Gita is a spiritual dictionary."</p>

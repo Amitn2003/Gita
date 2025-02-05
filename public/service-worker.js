@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-gita-cache-v6';
+const CACHE_NAME = 'my-gita-cache-v1';
 const API_URL = "https://bhagavad-gita3.p.rapidapi.com/v2/chapters/";
 const STATIC_FILES = [
   '/',
@@ -204,6 +204,7 @@ const sendRandomVerseNotification = async () => {
     }
     
     // Example usage:
+    console.log(verseData.verse_number , verseData.chapter_number )
     console.log(getFirstEnglishTranslation(verseData));
     
 
@@ -211,7 +212,7 @@ const sendRandomVerseNotification = async () => {
     const verseText = getFirstEnglishTranslation(verseData) || "Open Bhagavad Gita Verse";
 
     // Show the notification with verse text
-    self.registration.showNotification("Bhagavad Gita Verse", {
+    self.registration.showNotification(`Bhagavad Gita Verse ${verseData.chapter_number}.${verseData.verse_number}`, {
       body: verseText,
       icon: "https://mygita.vercel.app/gita2.png",
       badge: "https://mygita.vercel.app/gita-110.ico",
@@ -246,13 +247,13 @@ const sendRandomVerseNotification = async () => {
 // Schedule a notification every hour
 setInterval(() => {
   sendRandomVerseNotification();
-}, 3600000); // 1 hour in milliseconds
+}, 43200000); // 12 hour in milliseconds
 // setInterval(() => {
 //   sendRandomVerseNotification();
 // }, 1800000); // 30 minutes in milliseconds
 // setInterval(() => {
 //   sendRandomVerseNotification();
 // }, 600000); // 5 minutes in milliseconds
-setInterval(() => {
-  sendRandomVerseNotification();
-}, 10000); // 5 minutes in milliseconds
+// setInterval(() => {
+//   sendRandomVerseNotification();
+// }, 10000); // 5 minutes in milliseconds
