@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { fetchVerses } from '../utils/api';
 import LoadingVerseSkeleton from '../components/LoadingVerseSkeleton';
 import useSpeechSynthesis from '../hooks/useSpeachSynthesis';
+import VerseImageCard from "../components/VerseImageCard";
+import SocialShare from "../components/SocilShare";
+// import { SanskritContext } from "../context/SanskritContext";
 
 
 // Verse-specific image paths
@@ -40,8 +43,10 @@ const getRandomImage = (chapterNumber) => {
 
 const VersePage = () => {
   const { ch, sl } = useParams(); 
+  // const { isSanskrit } = useContext(SanskritContext);
   const [verse, setVerse] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [imageUrl, setImageUrl] = useState("");
   const [randomImage, setRandomImage] = useState("");
   const { isSpeaking, speak, pause, resume, stop } = useSpeechSynthesis();
 
@@ -138,33 +143,37 @@ const VersePage = () => {
           
         </div>
       </div> */}
-      <div className="p-4 sm:p-6 border border-amber-700 rounded-lg bg-gradient-to-b from-yellow-50 via-yellow-100 to-yellow-200 shadow-md">
+      <div className="p-4 sm:p-6 border border-amber-600 rounded-lg bg-gradient-to-b from-yellow-50 via-yellow-100 to-yellow-200 shadow-md">
   {/* Image Section */}
-  <div className="h-48 sm:h-64 md:h-75 w-full mb-4 relative overflow-hidden rounded-lg">
+  {/* <div className="h-48 sm:h-64 md:h-75 w-full mb-4 relative overflow-hidden rounded-lg">
     <img
       src={randomImage}
       alt={`Verse ${sl} from Chapter ${ch}`}
       className="w-full h-full object-contain sm:object-cover"
       loading="lazy"
     />
-  </div>
+  </div> */}
 
   {/* Title */}
-  <h1 className="text-2xl sm:text-3xl font-bold text-center text-amber-800 mb-4">
+  {/* <h1 className="text-2xl sm:text-3xl font-bold text-center text-amber-800 mb-4">
     Chapter {ch}, Verse {sl}
-  </h1>
+  </h1> */}
 
   {/* Verse Text */}
-  <p className="text-base sm:text-lg text-gray-800 text-center mb-4 noto-serif-devanagari-500">
+  {/* <p className="text-base sm:text-lg text-gray-800 text-center mb-4 noto-serif-devanagari-500">
     {verse.text}
-  </p>
+  </p> */}
 
   {/* English Translation */}
-  <p className="text-base sm:text-lg text-gray-800 text-center mb-4">
+  {/* <p className="text-base sm:text-lg text-gray-800 text-center mb-4">
     {englishTranslation}
-  </p>
+  </p> */}
 
   {/* Action Buttons */}
+          <div>
+          <VerseImageCard verse={verse} chapter={ch} randomImage={randomImage}/>
+          <br />
+          {/* {randomImage && <SocialShare imageUrl={randomImage} />} */}
   <div className="flex flex-col sm:flex-row justify-center gap-4 mb-4">
   <button
                 onClick={() => handleSpeakTranslation(englishTranslation)}
@@ -181,7 +190,9 @@ const VersePage = () => {
     >
             Speak Verse
           </button>
+
   </div>
+          </div>
 </div>
 
 
@@ -218,6 +229,7 @@ const VersePage = () => {
           </div>
         </div>
       )}
+      
     </div>
   );
 };
