@@ -51,7 +51,7 @@ const ChapterPage = () => {
 
 
   useEffect(() => {
-
+    window.scrollTo(0, 0);
     // Set a random image when the page loads
     setRandomImage(getRandomImage(parseInt(ch, 10)));
     

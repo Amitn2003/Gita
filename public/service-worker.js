@@ -247,7 +247,7 @@ const sendRandomVerseNotification = async () => {
 // Schedule a notification every hour
 setInterval(() => {
   sendRandomVerseNotification();
-}, 43200000); // 12 hour in milliseconds
+}, 21600000); // 12 hour in milliseconds
 // setInterval(() => {
 //   sendRandomVerseNotification();
 // }, 1800000); // 30 minutes in milliseconds

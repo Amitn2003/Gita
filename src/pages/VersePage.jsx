@@ -52,6 +52,7 @@ const VersePage = () => {
 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setRandomImage(getRandomImage(parseInt(ch, 10))); // Set random image when the page loads
 
     fetchVerses(ch)
@@ -143,7 +144,7 @@ const VersePage = () => {
           
         </div>
       </div> */}
-      <div className="p-4 sm:p-6 border border-amber-600 rounded-lg bg-gradient-to-b from-yellow-50 via-yellow-100 to-yellow-200 shadow-md">
+      <div className="p-4 sm:p-6 border border-amber-500 rounded-lg bg-gradient-to-b from-yellow-50 via-yellow-100 to-yellow-150 shadow-md">
   {/* Image Section */}
   {/* <div className="h-48 sm:h-64 md:h-75 w-full mb-4 relative overflow-hidden rounded-lg">
     <img
